@@ -184,7 +184,13 @@
         var figure = ed.getParam("uploadimage_figure", false);
         var alt_text = getInputValue("alt");
 
-        var imgstr = "<img src='" + json["image"]["url"] + "'";
+        var imgstr = "";
+
+        if (json["image"]["type"] == "video") {
+          imgstr += "<video src='" + json["image"]["url"] + "'";
+        } else {
+          imgstr += "<img src='" + json["image"]["url"] + "'";
+        }
 
         if(default_class != "")
           imgstr += " class='" + default_class + "'";
@@ -253,6 +259,5 @@
       });
     }
   });
-
   tinymce.PluginManager.add('uploadimage', tinymce.plugins.UploadImage);
 })();
